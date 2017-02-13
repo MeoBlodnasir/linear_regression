@@ -2,13 +2,17 @@ import csv
 
 teta0 = 0
 teta1 = 0
-with open('values.csv', 'rb') as csvfile:
+minimum = 0
+maximum = 0
+with open('values.csv', 'r') as csvfile:
     reader = csv.DictReader(csvfile, delimiter=',', quotechar='|')
     for row in reader:
-        teta0 = int(row['teta0'])
-        teta1 = int(row['teta1'])
+        teta0 = float(row['teta0'])
+        teta1 = float(row['teta1'])
+        maximum = float(row['max'])
+        minimum = float(row['min'])
 
 prompt = '> What is the car\'s mileage ?\n> '
-mileage = raw_input(prompt)
-ret = teta0 + teta1 * int(mileage)
-print ret
+mileage = float(input(prompt))
+ret = teta0 + teta1 * float((mileage - minimum) / (maximum - minimum))
+print (ret)
